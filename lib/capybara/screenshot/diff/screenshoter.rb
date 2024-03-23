@@ -116,6 +116,9 @@ module Capybara
           pending_image = BrowserHelpers.pending_image_to_load
           break unless pending_image
 
+          if timeout.nil?
+            timeout = 10.seconds
+          end
           if (Time.now - start) >= timeout
             raise Capybara::Screenshot::Diff::ASSERTION, "Images not loaded after #{timeout}s: #{pending_image.inspect}"
           end
